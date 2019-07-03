@@ -14,6 +14,7 @@ class Snippet(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=100, blank=True, default='')
     code = models.TextField()
+    highlighted = models.TextField()
     linenos = models.BooleanField(default=True)
     language = models.CharField(
         choices=LANGUAGE_CHOICES, default='python', max_length=100)
@@ -21,7 +22,6 @@ class Snippet(models.Model):
                              default='friendly', max_length=100)
     owner = models.ForeignKey(
         'auth.User', related_name='snippets', on_delete=models.CASCADE)
-    highlighted = models.TextField
 
     def save(self, *args, **kwargs):
         """
@@ -35,6 +35,9 @@ class Snippet(models.Model):
             style=self.style, linenos=linenos, full=True, **options)
         self.highlighted = highlight(self.code, lexer, formatter)
         super(Snippet, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.title
 
     class Meta:
         ordering = ('created',)
