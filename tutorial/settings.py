@@ -11,7 +11,10 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import environ
 
+env = environ.Env()
+environ.Env.read_env()
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -40,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_swagger',
     'snippets.apps.SnippetsConfig',
+    'oauth'
 ]
 
 MIDDLEWARE = [
@@ -124,5 +128,15 @@ STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
 }
+
+OAUTH_CONSENT_URI = env('OAUTH_CONSENT_URI')
+OAUTH_TOKEN_URI = env('OAUTH_TOKEN_URI')
+OAUTH_EMAIL_URI = env('OAUTH_EMAIL_URI')
+OAUTH_CLIENT_ID = env('OAUTH_CLIENT_ID')
+OAUTH_CLIENT_SECRET = env('OAUTH_CLIENT_SECRET')
+OAUTH_SCOPE = env('OAUTH_SCOPE')

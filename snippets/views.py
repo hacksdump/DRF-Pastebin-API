@@ -11,6 +11,7 @@ from rest_framework import renderers
 from rest_framework import viewsets
 
 from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticated
 
 
 class SnippetViewSet(viewsets.ModelViewSet):
@@ -38,5 +39,6 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
     This viewset automatically provides `list` and `detail` actions.
     """
+    permission_classes = (IsAuthenticated,)
     queryset = User.objects.all()
     serializer_class = UserSerializer
