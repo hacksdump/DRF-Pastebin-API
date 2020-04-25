@@ -128,9 +128,15 @@ STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
 }
 
-OAUTH_BASE_URI = env('OAUTH_BASE_URI')
+OAUTH_CONSENT_URI = env('OAUTH_CONSENT_URI')
+OAUTH_TOKEN_URI = env('OAUTH_TOKEN_URI')
+OAUTH_EMAIL_URI = env('OAUTH_EMAIL_URI')
 OAUTH_CLIENT_ID = env('OAUTH_CLIENT_ID')
+OAUTH_CLIENT_SECRET = env('OAUTH_CLIENT_SECRET')
 OAUTH_SCOPE = env('OAUTH_SCOPE')
