@@ -68,7 +68,7 @@ python manage.py runserver
    
 2. After the user visits the consent page and approves, the auth code is received by the server run by API consumer. This auth code should be sent to our server to get the JWT token which will ultimately give access to protected routes.
 
-    POST /auth/exchange-auth-token-for-jwt/
+    POST /auth/exchange-auth-code-for-jwt/
     JSON payload:
     ```json
     {
