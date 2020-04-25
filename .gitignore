@@ -3,3 +3,5 @@ XDG_CACHE_HOME
 **/__pycache__
 *.sqlite*
 /**/migrations
+.idea
+**/.env
